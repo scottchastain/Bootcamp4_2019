@@ -9,45 +9,57 @@ class App extends React.Component {
     super(props);
     this.state = {
       filterText: '',
-      selectedBuilding: 0
+      selectedBuilding: 1
     };
   }
 
   filterUpdate(value) {
     //Here you will need to set the filterText property of state to the value passed into this function
+		this.setState({
+			filterText: value
+		})
   }
 
   selectedUpdate(id) {
     //Here you will need to update the selectedBuilding property of state to the id passed into this function
+		this.setState({
+			selectedBuilding: id
+		})
   }
 
   render() {
-    
+
     return (
       <div className="bg">
         <div className="row">
           <h1>UF Directory App</h1>
         </div>
 
-        <Search/>
+        <Search filterUpdate={this.filterUpdate.bind(this)}/>
         <main>
           <div className="row">
             <div className="column1">
               <div className="tableWrapper">
                 <table className="table table-striped table-hover">
-                  <tr>
+                  <tbody>
+									<tr>
                     <td>
                       <b>Code Building</b>
                     </td>
                   </tr>
                   <BuildingList
+										filterText = {this.state.filterText}
                     data={this.props.data}
+										selectedUpdate={this.selectedUpdate.bind(this)}
                   />
+									</tbody>
                 </table>
               </div>
             </div>
             <div className="column2">
-              <ViewBuilding />
+              <ViewBuilding
+								data={this.props.data}
+								selectedBuilding={this.state.selectedBuilding}/>
             </div>
           </div>
           <Credit />
