@@ -13,7 +13,9 @@ class Search extends React.Component {
 
 		return (
 			<form>
-				<input type="text" ref="filterText" placeholder="Type to Filter" onChange={this.filterUpdate.bind(this)} />
+			<div class="input-group input-group">
+				<input class="form-control form-control-m" type="text" ref="filterText" placeholder="Type to Filter" onChange={this.filterUpdate.bind(this)} />
+			</div>
 			</form>
 		);
 	}

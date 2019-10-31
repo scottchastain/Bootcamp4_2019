@@ -4,27 +4,31 @@ class ViewBuilding extends React.Component {
 	render() {
 		const { data, selectedBuilding } = this.props;
 
-		const selection = data[selectedBuilding-1];
+		const selection = data.filter(building => building.id === selectedBuilding)[0];
 
 		let coords, address;
 
 		if (selection.coordinates) {
-			coords = <><tr><td>coordinates:</td></tr>
-							<tr><td>latitude: {selection.coordinates.latitude}</td></tr>
-							<tr><td>longitude: {selection.coordinates.longitude}</td></tr></>;
+			coords = <><tr><td>Coordinates:</td></tr>
+							<tr><td>Latitude: {selection.coordinates.latitude}</td></tr>
+							<tr><td>Longitude: {selection.coordinates.longitude}</td></tr></>;
 		}
 
 		if (selection.address) {
-			address = <tr><td>address: {selection.address}</td></tr>;
+			address = <tr><td>Address: {selection.address}</td></tr>;
 		}
 
-		return (<table><tbody>
-					<tr><td>id: {selection.id}</td></tr>
-					<tr><td>code: {selection.code}</td></tr>
-					<tr><td>name: {selection.name}</td></tr>
-					{coords}
-					{address}
-					</tbody></table>
+		return (
+					<div class="card">
+					<h4 class="card-header">Building Info</h4>
+					<div class="card-body">
+						<table><tbody>
+							<tr><td>Code: {selection.code}</td></tr>
+							<tr><td>Name: {selection.name}</td></tr>
+							{coords}
+							{address}
+						</tbody></table>
+					</div></div>
 		);
 	}
 }
